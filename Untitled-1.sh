@@ -30,14 +30,6 @@ else
     add_cron_job "*/30 * * * * pgrep -x \"nezha-agent\" > /dev/null || ${CRON_NEZHA}"
     add_cron_job "*/30 * * * * pgrep -x \"s5\" > /dev/null || ${CRON_S5}"
     add_cron_job "*/30 * * * * pgrep -x \"nezha-dashboard\" > /dev/null || ${CRON_DASHBOARD}"
-  elif [ -e "${WORKDIR}/start.sh" ]; then
-    echo "添加 nezha 的 crontab 重启任务"
-    add_cron_job "@reboot pkill -kill -u ${USER} && ${CRON_NEZHA}"
-    add_cron_job "*/30 * * * * pgrep -x \"nezha-agent\" > /dev/null || ${CRON_NEZHA}"
-  elif [ -e "${FILE_PATH}/config.json" ]; then
-    echo "添加 socks5 的 crontab 重启任务"
-    add_cron_job "@reboot pkill -kill -u ${USER} && ${CRON_S5}"
-    add_cron_job "*/30 * * * * pgrep -x \"s5\" > /dev/null || ${CRON_S5}"
   elif [ -e "/home/${USER}/.nezha-dashboard/start.sh" ] && [ -e "${WORKDIR}/start.sh" ]; then
     echo "添加 nezha-dashboard 的 crontab 重启任务"
     add_cron_job "@reboot pkill -kill -u ${USER} && ${CRON_DASHBOARD} && ${CRON_NEZHA}"
@@ -52,5 +44,13 @@ else
     echo "添加 nezha-dashboard 的 crontab 重启任务"
     add_cron_job "@reboot pkill -kill -u ${USER} && ${CRON_DASHBOARD}"
     add_cron_job "*/30 * * * * pgrep -x \"nezha-dashboard\" > /dev/null || ${CRON_DASHBOARD}"
+  elif [ -e "${WORKDIR}/start.sh" ]; then
+    echo "添加 nezha 的 crontab 重启任务"
+    add_cron_job "@reboot pkill -kill -u ${USER} && ${CRON_NEZHA}"
+    add_cron_job "*/30 * * * * pgrep -x \"nezha-agent\" > /dev/null || ${CRON_NEZHA}"
+  elif [ -e "${FILE_PATH}/config.json" ]; then
+    echo "添加 socks5 的 crontab 重启任务"
+    add_cron_job "@reboot pkill -kill -u ${USER} && ${CRON_S5}"
+    add_cron_job "*/30 * * * * pgrep -x \"s5\" > /dev/null || ${CRON_S5}"
   fi
 fi
