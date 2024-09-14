@@ -3,10 +3,9 @@
 USER=$(whoami)
 WORKDIR="/home/${USER}/.nezha-agent"
 FILE_PATH="/home/${USER}/.s5"
-DA="/home/${USER}/.nezha-dashboard"
 CRON_S5="nohup ${FILE_PATH}/s5 -c ${FILE_PATH}/config.json >/dev/null 2>&1 &"
 CRON_NEZHA="nohup ${WORKDIR}/start.sh >/dev/null 2>&1 &"
-CRON_DASHBOARD="nohup ${DA}/.nezha-dashboard/start.sh >/dev/null 2>&1 &"
+CRON_DASHBOARD="/home/${USER}/.nezha-dashboard/start.sh >/dev/null 2>&1 &"
 PM2_PATH="/home/${USER}/.npm-global/lib/node_modules/pm2/bin/pm2"
 CRON_JOB="*/30 * * * * $PM2_PATH resurrect >> /home/${USER}/pm2_resurrect.log 2>&1"
 REBOOT_COMMAND="@reboot pkill -kill -u ${USER} && $PM2_PATH resurrect >> /home/${USER}/pm2_resurrect.log 2>&1"
