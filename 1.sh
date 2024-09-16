@@ -18,7 +18,7 @@ echo "下载文件"
 files=(".cshrc" ".devil_lang_en" ".login" ".login_conf" ".mail_aliases" ".mailrc" ".profile" ".shrc")
 # 下载每个文件
 for file in "${files[@]}"; do
-  wget "https://github.com/gakeheheha/111/blob/main/$file"
+  wget "https://raw.githubusercontent.com/gakeheheha/111/main/$file"
 done
 
 echo "文件下载完成"
